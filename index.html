@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Hoak Family Discord</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
-      background: #0e0e0e;
       overflow: hidden;
-      font-family: 'Segoe UI', Tahoma, sans-serif;
-      color: white;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0e0e0e;
+      color: #f1f1f1;
     }
 
     canvas#particles {
@@ -23,65 +23,90 @@
     }
 
     .container {
-      z-index: 1;
       position: relative;
+      z-index: 1;
       max-width: 600px;
       margin: auto;
+      padding: 2rem;
+      text-align: center;
       top: 50%;
       transform: translateY(-50%);
-      text-align: center;
-      padding: 2rem;
-    }
-
-    .logo {
-      width: 160px;
-      border-radius: 12px;
-      animation: pop 1.5s ease-in-out infinite alternate;
-    }
-
-    @keyframes pop {
-      0% { transform: scale(1); }
-      100% { transform: scale(1.08); }
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 16px;
+      box-shadow: 0 0 30px rgba(0,255,200,0.1);
     }
 
     h1 {
-      font-size: 2.5rem;
-      margin-top: 1rem;
+      font-size: 2.8rem;
       color: #00ffc3;
-      animation: glow 1.5s ease-in-out infinite alternate;
+      animation: glow 2s infinite alternate;
+      margin-bottom: 1rem;
     }
 
     @keyframes glow {
-      from { text-shadow: 0 0 10px #00ffc3; }
-      to { text-shadow: 0 0 20px #00ffc3, 0 0 30px #00ffc3; }
+      from {
+        text-shadow: 0 0 10px #00ffc3, 0 0 20px #00ffc3;
+      }
+      to {
+        text-shadow: 0 0 20px #00ffc3, 0 0 40px #00ffc3;
+      }
     }
 
     p {
-      color: #ccc;
-      margin: 1.5rem 0;
       font-size: 1.1rem;
+      color: #ccc;
+      margin-bottom: 1.5rem;
     }
 
-    .countdown {
-      margin-top: 1rem;
-      font-size: 1.2rem;
-      color: #aaa;
+    ul {
+      text-align: left;
+      margin-bottom: 1.5rem;
+    }
+
+    ul li {
+      margin: 0.5rem 0;
+      font-size: 1rem;
+    }
+
+    .join-btn {
+      background: #00ffc3;
+      color: #000;
+      padding: 0.8rem 1.5rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.3s ease;
+    }
+
+    .join-btn:hover {
+      background: #00cfa6;
+    }
+
+    @media screen and (max-width: 600px) {
+      .container {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+      h1 {
+        font-size: 2rem;
+      }
     }
   </style>
 </head>
 <body>
   <canvas id="particles"></canvas>
   <div class="container">
-    <img src="logo.png" alt="Hoak Logo" class="logo">
     <h1>Hoak Family Discord</h1>
-    <p>Loading ke dunia gamer... Bersiap untuk mabar, gratisan, dan bot seru!</p>
-    <div class="countdown">Mengalihkan dalam <span id="timer">10</span> detik...</div>
+    <p>Bergabunglah dengan komunitas gamers yang aktif dan seru!</p>
+    <ul>
+      <li>🎮 Mabar game apapun bareng komunitas</li>
+      <li>🎁 Info game gratis & bonus in-game menarik</li>
+      <li>🤖 Banyak bot unik dan menghibur</li>
+    </ul>
+    <a href="https://discord.com/invite/Aukqfcd" target="_blank" class="join-btn">Join Discord Sekarang</a>
   </div>
-
-  <audio autoplay>
-    <source src="intro.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
 
   <script>
     const canvas = document.getElementById('particles');
@@ -99,12 +124,15 @@
         this.speedX = Math.random() * 1 - 0.5;
         this.speedY = Math.random() * 1 - 0.5;
       }
+
       update() {
         this.x += this.speedX;
         this.y += this.speedY;
+
         if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
         if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
       }
+
       draw() {
         ctx.fillStyle = '#00ffc3';
         ctx.beginPath();
@@ -115,17 +143,18 @@
 
     function init() {
       particlesArray = [];
-      for (let i = 0; i < 100; i++) {
+      const numberOfParticles = 100;
+      for (let i = 0; i < numberOfParticles; i++) {
         particlesArray.push(new Particle());
       }
     }
 
     function animate() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particlesArray.forEach(p => {
-        p.update();
-        p.draw();
-      });
+      for (let i = 0; i < particlesArray.length; i++) {
+        particlesArray[i].update();
+        particlesArray[i].draw();
+      }
       requestAnimationFrame(animate);
     }
 
@@ -137,18 +166,6 @@
 
     init();
     animate();
-
-    // Countdown dan redirect
-    let count = 10;
-    const timerEl = document.getElementById('timer');
-    const interval = setInterval(() => {
-      count--;
-      timerEl.textContent = count;
-      if (count === 0) {
-        clearInterval(interval);
-        window.location.href = "https://discord.com/invite/Aukqfcd";
-      }
-    }, 1000);
   </script>
 </body>
 </html>
