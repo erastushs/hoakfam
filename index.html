@@ -9,7 +9,7 @@
       margin: 0;
       padding: 0;
       height: 100%;
-      background: #0e0e0e;
+      background: #1e1f22;
       overflow: hidden;
       font-family: 'Segoe UI', Tahoma, sans-serif;
       color: white;
@@ -47,13 +47,13 @@
     h1 {
       font-size: 2.5rem;
       margin-top: 1rem;
-      color: #00ffc3;
+      color: #5865F2;
       animation: glow 1.5s ease-in-out infinite alternate;
     }
 
     @keyframes glow {
-      from { text-shadow: 0 0 10px #00ffc3; }
-      to { text-shadow: 0 0 20px #00ffc3, 0 0 30px #00ffc3; }
+      from { text-shadow: 0 0 10px #5865F2; }
+      to { text-shadow: 0 0 20px #5865F2, 0 0 30px #5865F2; }
     }
 
     p {
@@ -62,10 +62,36 @@
       font-size: 1.1rem;
     }
 
-    .countdown {
+    .progress-ring {
+      width: 120px;
+      height: 120px;
+      margin: 30px auto 0;
+      position: relative;
+    }
+
+    svg {
+      transform: rotate(-90deg);
+    }
+
+    circle {
+      fill: none;
+      stroke-width: 10;
+    }
+
+    .bg {
+      stroke: #333;
+    }
+
+    .progress {
+      stroke: #5865F2;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 1s linear;
+    }
+
+    .note {
       margin-top: 1rem;
-      font-size: 1.2rem;
-      color: #aaa;
+      color: #888;
+      font-size: 0.95rem;
     }
   </style>
 </head>
@@ -75,7 +101,14 @@
     <img src="logo.png" alt="Hoak Logo" class="logo">
     <h1>Hoak Family Discord</h1>
     <p>Loading ke dunia gamer... Bersiap untuk mabar, gratisan, dan bot seru!</p>
-    <div class="countdown">Mengalihkan dalam <span id="timer">10</span> detik...</div>
+
+    <div class="progress-ring">
+      <svg width="120" height="120">
+        <circle class="bg" r="50" cx="60" cy="60"/>
+        <circle class="progress" r="50" cx="60" cy="60"/>
+      </svg>
+      <div class="note">Bersiap masuk server...</div>
+    </div>
   </div>
 
   <audio autoplay>
@@ -84,6 +117,7 @@
   </audio>
 
   <script>
+    // Particle Background
     const canvas = document.getElementById('particles');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
@@ -106,7 +140,7 @@
         if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
       }
       draw() {
-        ctx.fillStyle = '#00ffc3';
+        ctx.fillStyle = '#5865F2';
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
@@ -138,13 +172,26 @@
     init();
     animate();
 
-    // Countdown dan redirect
-    let count = 10;
-    const timerEl = document.getElementById('timer');
+    // Progress Ring Animation
+    const progressCircle = document.querySelector('.progress');
+    const radius = progressCircle.r.baseVal.value;
+    const circumference = 2 * Math.PI * radius;
+
+    progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
+    progressCircle.style.strokeDashoffset = 0;
+
+    function setProgress(percent) {
+      const offset = circumference - (percent / 100) * circumference;
+      progressCircle.style.strokeDashoffset = offset;
+    }
+
+    // Animate countdown over 10 seconds
+    let timeLeft = 10;
+    setProgress(100);
     const interval = setInterval(() => {
-      count--;
-      timerEl.textContent = count;
-      if (count === 0) {
+      timeLeft--;
+      setProgress((timeLeft / 10) * 100);
+      if (timeLeft <= 0) {
         clearInterval(interval);
         window.location.href = "https://discord.com/invite/Aukqfcd";
       }
