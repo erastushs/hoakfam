@@ -2,8 +2,9 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Hoak Family Discord</title>
+  <title>Hoak Family</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="logo.png" type="image/png">
   <style>
     html, body {
       margin: 0;
@@ -36,8 +37,15 @@
     .logo {
       width: 160px;
       border-radius: 12px;
-      position: relative;
       animation: glitch 1s infinite;
+    }
+
+    .title {
+      font-size: 2.5rem;
+      margin-top: 1rem;
+      color: #5865F2;
+      position: relative;
+      animation: glitchText 1s infinite;
     }
 
     @keyframes glitch {
@@ -49,16 +57,13 @@
       100% { transform: translate(0); }
     }
 
-    h1 {
-      font-size: 2.5rem;
-      margin-top: 1rem;
-      color: #5865F2;
-      animation: glow 1.5s ease-in-out infinite alternate;
-    }
-
-    @keyframes glow {
-      from { text-shadow: 0 0 10px #5865F2; }
-      to { text-shadow: 0 0 20px #5865F2, 0 0 30px #5865F2; }
+    @keyframes glitchText {
+      0% { text-shadow: 2px 0 red; }
+      20% { text-shadow: -2px 0 cyan; }
+      40% { text-shadow: 2px 2px lime; }
+      60% { text-shadow: -1px -1px magenta; }
+      80% { text-shadow: 1px 1px #5865F2; }
+      100% { text-shadow: 0 0 10px #5865F2; }
     }
 
     p {
@@ -94,9 +99,10 @@
 </head>
 <body>
   <canvas id="particles"></canvas>
+
   <div class="container">
     <img src="logo.png" alt="Hoak Logo" class="logo">
-    <h1>Hoak Family Discord</h1>
+    <h1 class="title">Hoak Family</h1>
     <p>Bergabunglah dengan komunitas gamers yang aktif dan seru!</p>
     <ul>
       <li>🎮 Mabar game apapun bareng kita</li>
@@ -112,7 +118,12 @@
   </audio>
 
   <script>
-    // Music autoplay fix for mobile
+    // Redirect setelah 10 detik
+    setTimeout(() => {
+      window.location.href = 'https://discord.com/invite/Aukqfcd';
+    }, 10000);
+
+    // Autoplay fix (khusus mobile)
     document.addEventListener('click', () => {
       const audio = document.getElementById('bgMusic');
       if (audio.paused) {
