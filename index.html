@@ -6,48 +6,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="logo.png" type="image/png">
   <style>
+    * {
+      box-sizing: border-box;
+    }
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
       background: #1e1f22;
-      overflow: hidden;
       font-family: 'Segoe UI', Tahoma, sans-serif;
       color: white;
+      overflow: hidden;
     }
-
     canvas#particles {
       position: fixed;
       top: 0;
       left: 0;
       z-index: 0;
     }
-
     .container {
       z-index: 1;
       position: relative;
-      max-width: 600px;
-      margin: auto;
-      top: 50%;
-      transform: translateY(-50%);
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
       text-align: center;
-      padding: 2rem;
     }
-
     .logo {
-      width: 160px;
+      width: 130px;
       border-radius: 12px;
       animation: glitch 1s infinite;
     }
-
-    .title {
-      font-size: 2.5rem;
-      margin-top: 1rem;
-      color: #5865F2;
-      position: relative;
-      animation: glitchText 1s infinite;
-    }
-
     @keyframes glitch {
       0% { transform: translate(0); }
       20% { transform: translate(-2px, 2px); }
@@ -56,32 +49,39 @@
       80% { transform: translate(1px, -1px); }
       100% { transform: translate(0); }
     }
-
-    @keyframes glitchText {
-      0% { text-shadow: 2px 0 red; }
-      20% { text-shadow: -2px 0 cyan; }
-      40% { text-shadow: 2px 2px lime; }
-      60% { text-shadow: -1px -1px magenta; }
-      80% { text-shadow: 1px 1px #5865F2; }
-      100% { text-shadow: 0 0 10px #5865F2; }
+    h1 {
+      font-size: 2.5rem;
+      margin-top: 1rem;
+      color: #5865F2;
+      text-shadow: 0 0 15px #5865F2;
     }
-
-    p {
-      color: #ccc;
+    .typing {
       font-size: 1.2rem;
+      color: #ccc;
+      height: 1.5em;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: .15em solid #5865F2;
+      animation: typing 3s steps(40, end), blink .75s step-end infinite;
     }
-
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    @keyframes blink {
+      from, to { border-color: transparent }
+      50% { border-color: #5865F2 }
+    }
     ul {
-      text-align: left;
-      display: inline-block;
-      margin-top: 1.2rem;
       color: #ddd;
-      font-size: 1.05rem;
+      font-size: 1rem;
+      margin-top: 1.5rem;
+      margin-bottom: 1.5rem;
       line-height: 1.8;
+      padding-left: 0;
+      list-style: none;
     }
-
     button {
-      margin-top: 2rem;
       padding: 12px 30px;
       background-color: #5865F2;
       border: none;
@@ -91,9 +91,25 @@
       cursor: pointer;
       transition: background-color 0.3s ease;
     }
-
     button:hover {
       background-color: #4752c4;
+    }
+    .loader {
+      margin-top: 30px;
+      width: 40px;
+      height: 40px;
+      border: 4px solid #5865F2;
+      border-top: 4px solid transparent;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @media screen and (max-width: 480px) {
+      h1 { font-size: 2rem; }
+      .typing { font-size: 1rem; }
     }
   </style>
 </head>
@@ -102,19 +118,21 @@
 
   <div class="container">
     <img src="logo.png" alt="Hoak Logo" class="logo">
-    <h1 class="title">Hoak Family</h1>
-    <p>Bergabunglah dengan komunitas gamers yang aktif dan seru!</p>
+    <h1>Hoak Family</h1>
+    <div class="typing" id="typewriter"></div>
+
     <ul>
       <li>🎮 Mabar game apapun bareng kita</li>
       <li>🎁 Info game gratis & info bonus in-game menarik</li>
       <li>🤖 Banyak bot unik dan menghibur</li>
     </ul>
+
     <button onclick="window.location.href='https://discord.com/invite/Aukqfcd'">Join Sekarang</button>
+    <div class="loader"></div>
   </div>
 
   <audio id="bgMusic" autoplay loop>
     <source src="intro.mp3" type="audio/mpeg">
-    Browser kamu tidak mendukung audio.
   </audio>
 
   <script>
@@ -123,7 +141,7 @@
       window.location.href = 'https://discord.com/invite/Aukqfcd';
     }, 10000);
 
-    // Autoplay fix (khusus mobile)
+    // Autoplay fix mobile
     document.addEventListener('click', () => {
       const audio = document.getElementById('bgMusic');
       if (audio.paused) {
@@ -131,7 +149,20 @@
       }
     });
 
-    // Particle background
+    // Efek typing
+    const text = "Bergabunglah dengan komunitas gamers yang aktif dan seru!";
+    let i = 0;
+    function typeWriter() {
+      if (i < text.length) {
+        document.getElementById("typewriter").textContent += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 40);
+      }
+    }
+    typeWriter();
+
+    // Playstation Particles
+    const symbols = ["△", "□", "○", "×"];
     const canvas = document.getElementById('particles');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
@@ -143,9 +174,11 @@
       constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2 + 1;
-        this.speedX = Math.random() * 1 - 0.5;
-        this.speedY = Math.random() * 1 - 0.5;
+        this.size = Math.random() * 24 + 16;
+        this.speedX = Math.random() * 0.6 - 0.3;
+        this.speedY = Math.random() * 0.6 - 0.3;
+        this.symbol = symbols[Math.floor(Math.random() * symbols.length)];
+        this.alpha = Math.random() * 0.5 + 0.3;
       }
       update() {
         this.x += this.speedX;
@@ -154,16 +187,15 @@
         if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
       }
       draw() {
-        ctx.fillStyle = '#5865F2';
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
+        ctx.font = this.size + "px Arial";
+        ctx.fillStyle = `rgba(88, 101, 242, ${this.alpha})`;
+        ctx.fillText(this.symbol, this.x, this.y);
       }
     }
 
-    function init() {
+    function initParticles() {
       particlesArray = [];
-      for (let i = 0; i < 100; i++) {
+      for (let i = 0; i < 70; i++) {
         particlesArray.push(new Particle());
       }
     }
@@ -180,10 +212,10 @@
     window.addEventListener('resize', () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      init();
+      initParticles();
     });
 
-    init();
+    initParticles();
     animate();
   </script>
 </body>
