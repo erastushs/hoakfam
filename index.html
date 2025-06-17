@@ -101,6 +101,27 @@
       margin-top: 1.5rem;
       max-width: 300px;
     }
+    #easter-egg {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.95);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    #easter-egg iframe {
+      width: 80vw;
+      height: 45vw;
+      max-width: 800px;
+      max-height: 450px;
+      border: none;
+      border-radius: 12px;
+    }
     @media screen and (max-width: 480px) {
       h1 { font-size: 2rem; }
       .typing { font-size: 1rem; }
@@ -125,6 +146,8 @@
   💬 "Server paling rame buat mabar malam-malam!"<br><strong>- Devan#007</strong>
 </div>
 
+  </div>  <div id="easter-egg">
+    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&rel=0" allow="autoplay"></iframe>
   </div>  <audio id="bgMusic" autoplay loop>
     <source src="intro.mp3" type="audio/mpeg">
   </audio>  <script>
@@ -216,7 +239,7 @@
     logo.addEventListener('click', () => {
       logoClickCount++;
       if (logoClickCount === 7) {
-        alert('🕹️ Kamu menemukan rahasia tersembunyi di Hoak Family!');
+        document.getElementById('easter-egg').style.display = 'flex';
         logoClickCount = 0;
       }
     });
