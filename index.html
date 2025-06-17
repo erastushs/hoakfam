@@ -1,31 +1,35 @@
-<!DOCTYPE html><html lang="id">
+<!DOCTYPE html>
+<html lang="id">
 <head>
   <meta charset="UTF-8">
   <title>Hoak Family</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="icon" href="logo.png" type="image/png">
   <style>
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box }
     html, body {
       margin: 0;
       padding: 0;
-      height: 100%;
+      min-height: 100vh;
       background: #1e1f22;
       font-family: 'Segoe UI', Tahoma, sans-serif;
       color: white;
-      overflow: hidden;
+      overflow-x: hidden;
     }
     canvas#particles {
       position: fixed;
       top: 0;
       left: 0;
       z-index: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
     }
     .container {
       z-index: 1;
       position: relative;
       width: 100%;
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -76,10 +80,10 @@
     }
     button {
       padding: 12px 30px;
-      background-color: #5865F2;
+      background: #5865F2;
       border: none;
       border-radius: 8px;
-      color: white;
+      color: #ffffff;
       font-size: 1.1rem;
       cursor: pointer;
       animation: pulse 1.5s infinite;
@@ -90,9 +94,9 @@
       box-shadow: 0 0 10px #5865F2;
     }
     @keyframes pulse {
-      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(88,101,242, 0.7); }
-      70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(88,101,242, 0); }
-      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(88,101,242, 0); }
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(88, 101, 242, 0.7); }
+      70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(88, 101, 242, 0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(88, 101, 242, 0); }
     }
     .testimoni {
       font-style: italic;
@@ -108,7 +112,7 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      background-color: rgba(0, 0, 0, 0.95);
+      background: rgba(0, 0, 0, 0.95);
       justify-content: center;
       align-items: center;
     }
@@ -120,10 +124,12 @@
       border: none;
       border-radius: 12px;
     }
-    @media screen and (max-width: 480px) {
-      h1 { font-size: 2rem; }
-      .typing { font-size: 1rem; }
-      button { width: 80%; }
+    @media (max-width: 480px) {
+      h1 { font-size: 1.5rem }
+      .typing { font-size: 0.9rem }
+      button { width: 90% }
+      ul { font-size: 0.9rem }
+      .logo { width: 100px }
     }
   </style>
 </head>
@@ -132,30 +138,35 @@
   <div class="container">
     <img src="logo.png" alt="Hoak Logo" class="logo" id="logo">
     <h1>Hoak Family</h1>
-    <div class="typing" id="typewriter"></div><ul>
-  <li title="Main bareng?">🎮 Mabar game apapun bareng kita</li>
-  <li title="Gratisan alert">🎁 Info game gratis & info bonus in-game menarik</li>
-  <li title="Bot lucu?">🤖 Banyak bot unik dan menghibur</li>
-</ul>
+    <div class="typing" id="typewriter"></div>
+    <ul>
+      <li title="Main bareng?">🎮 Mabar game apapun bareng kita</li>
+      <li title="Gratisan alert">🎁 Info game gratis & info bonus in-game menarik</li>
+      <li title="Bot lucu?">🤖 Banyak bot unik dan menghibur</li>
+    </ul>
+    <button onclick="window.location.href='https://discord.com/invite/Aukqfcd'">Join Sekarang</button>
 
-<button onclick="window.location.href='https://discord.com/invite/Aukqfcd'">Join Sekarang</button>
+    <div class="testimoni">
+      💬 "Server paling rame buat mabar malam-malam!"<br><strong>- Devan#007</strong>
+    </div>
+  </div>
 
-<div class="testimoni">
-  💬 "Server paling rame buat mabar malam-malam!"<br><strong>- Devan#007</strong>
-</div>
-
-  </div>  <div id="easter-egg">
+  <div id="easter-egg">
     <iframe id="rickroll" src="" allow="autoplay"></iframe>
-  </div>  <audio id="bgMusic" autoplay loop>
+  </div>
+
+  <audio id="bgMusic" autoplay loop>
     <source src="intro.mp3" type="audio/mpeg">
-  </audio>  <script>
-    // Redirect
+  </audio>
+
+  <script>
+    // Redirect after 30sec
     setTimeout(() => {
-      document.body.innerHTML = '<div style="color:white;display:flex;align-items:center;justify-content:center;height:100vh;font-size:1.5rem">Redirecting...</div>';
-      window.location.href = 'https://discord.com/invite/Aukqfcd';
+      document.body.innerHTML ='<div style="color:white;display:flex;align-items:center;justify-content:center;height:100vh;font-size:1.5rem">Redirecting...</div>';
+      window.location.href='https://discord.com/invite/Aukqfcd';
     }, 30000);
 
-    // Play music on click
+    // Play audio on first click
     document.addEventListener('click', () => {
       const audio = document.getElementById('bgMusic');
       if (audio.paused) {
@@ -163,7 +174,7 @@
       }
     });
 
-    // Efek typing
+    // Typing
     const text = "Bergabunglah dengan komunitas gamers yang aktif dan seru!";
     let i = 0;
     function typeWriter() {
@@ -175,45 +186,49 @@
     }
     typeWriter();
 
-    // Partikel simbol
-    const symbols = ["△", "□", "○", "×"];
+    // Partikel
+    const symbols = ["△","□","○","×"];
+
     const canvas = document.getElementById('particles');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
     let particlesArray = [];
+
     class Particle {
-      constructor() {
+      constructor(){
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
         this.size = Math.random() * 24 + 16;
         this.speedX = Math.random() * 0.6 - 0.3;
         this.speedY = Math.random() * 0.6 - 0.3;
         this.symbol = symbols[Math.floor(Math.random() * symbols.length)];
+
         this.alpha = Math.random() * 0.5 + 0.3;
       }
-      update() {
+      update(){
         this.x += this.speedX;
         this.y += this.speedY;
-        if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
-        if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
+
+        if(this.x > canvas.width || this.x < 0) this.speedX *= -1;
+        if(this.y > canvas.height || this.y < 0) this.speedY *= -1;
       }
-      draw() {
+      draw(){
         ctx.font = this.size + "px Arial";
         ctx.fillStyle = `rgba(88, 101, 242, ${this.alpha})`;
         ctx.fillText(this.symbol, this.x, this.y);
       }
     }
 
-    function initParticles() {
+    function initParticles(){
       particlesArray = [];
-      for (let i = 0; i < 70; i++) {
-        particlesArray.push(new Particle());
+
+      for(let i = 0; i < 70; i++) {
+        particlesArray.push(new Particle());  
       }
     }
-
-    function animate() {
+    function animate(){
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       particlesArray.forEach(p => {
         p.update();
@@ -221,7 +236,6 @@
       });
       requestAnimationFrame(animate);
     }
-
     window.addEventListener('resize', () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
@@ -231,7 +245,7 @@
     initParticles();
     animate();
 
-    // Easter egg klik logo 7x
+    // Easter Egg
     let logoClickCount = 0;
     const logo = document.getElementById('logo');
     logo.addEventListener('click', () => {
@@ -243,5 +257,8 @@
         logoClickCount = 0;
       }
     });
-  </script></body>
+
+  </script>
+</body>
 </html>
+
