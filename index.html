@@ -36,12 +36,17 @@
     .logo {
       width: 160px;
       border-radius: 12px;
-      animation: pop 1.5s ease-in-out infinite alternate;
+      position: relative;
+      animation: glitch 1s infinite;
     }
 
-    @keyframes pop {
-      0% { transform: scale(1); }
-      100% { transform: scale(1.08); }
+    @keyframes glitch {
+      0% { transform: translate(0); }
+      20% { transform: translate(-2px, 2px); }
+      40% { transform: translate(2px, -2px); }
+      60% { transform: translate(-1px, 1px); }
+      80% { transform: translate(1px, -1px); }
+      100% { transform: translate(0); }
     }
 
     h1 {
@@ -58,40 +63,32 @@
 
     p {
       color: #ccc;
-      margin: 1.5rem 0;
+      font-size: 1.2rem;
+    }
+
+    ul {
+      text-align: left;
+      display: inline-block;
+      margin-top: 1.2rem;
+      color: #ddd;
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+
+    button {
+      margin-top: 2rem;
+      padding: 12px 30px;
+      background-color: #5865F2;
+      border: none;
+      border-radius: 8px;
+      color: white;
       font-size: 1.1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
     }
 
-    .progress-ring {
-      width: 120px;
-      height: 120px;
-      margin: 30px auto 0;
-      position: relative;
-    }
-
-    svg {
-      transform: rotate(-90deg);
-    }
-
-    circle {
-      fill: none;
-      stroke-width: 10;
-    }
-
-    .bg {
-      stroke: #333;
-    }
-
-    .progress {
-      stroke: #5865F2;
-      stroke-linecap: round;
-      transition: stroke-dashoffset 1s linear;
-    }
-
-    .note {
-      margin-top: 1rem;
-      color: #888;
-      font-size: 0.95rem;
+    button:hover {
+      background-color: #4752c4;
     }
   </style>
 </head>
@@ -100,24 +97,30 @@
   <div class="container">
     <img src="logo.png" alt="Hoak Logo" class="logo">
     <h1>Hoak Family Discord</h1>
-    <p>Loading ke dunia gamer... Bersiap untuk mabar, gratisan, dan bot seru!</p>
-
-    <div class="progress-ring">
-      <svg width="120" height="120">
-        <circle class="bg" r="50" cx="60" cy="60"/>
-        <circle class="progress" r="50" cx="60" cy="60"/>
-      </svg>
-      <div class="note">Bersiap masuk server...</div>
-    </div>
+    <p>Bergabunglah dengan komunitas gamers yang aktif dan seru!</p>
+    <ul>
+      <li>🎮 Mabar game apapun bareng kita</li>
+      <li>🎁 Info game gratis & info bonus in-game menarik</li>
+      <li>🤖 Banyak bot unik dan menghibur</li>
+    </ul>
+    <button onclick="window.location.href='https://discord.com/invite/Aukqfcd'">Join Sekarang</button>
   </div>
 
-  <audio autoplay>
+  <audio id="bgMusic" autoplay loop>
     <source src="intro.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
+    Browser kamu tidak mendukung audio.
   </audio>
 
   <script>
-    // Particle Background
+    // Music autoplay fix for mobile
+    document.addEventListener('click', () => {
+      const audio = document.getElementById('bgMusic');
+      if (audio.paused) {
+        audio.play().catch(() => {});
+      }
+    });
+
+    // Particle background
     const canvas = document.getElementById('particles');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
@@ -171,31 +174,6 @@
 
     init();
     animate();
-
-    // Progress Ring Animation
-    const progressCircle = document.querySelector('.progress');
-    const radius = progressCircle.r.baseVal.value;
-    const circumference = 2 * Math.PI * radius;
-
-    progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
-    progressCircle.style.strokeDashoffset = 0;
-
-    function setProgress(percent) {
-      const offset = circumference - (percent / 100) * circumference;
-      progressCircle.style.strokeDashoffset = offset;
-    }
-
-    // Animate countdown over 10 seconds
-    let timeLeft = 10;
-    setProgress(100);
-    const interval = setInterval(() => {
-      timeLeft--;
-      setProgress((timeLeft / 10) * 100);
-      if (timeLeft <= 0) {
-        clearInterval(interval);
-        window.location.href = "https://discord.com/invite/Aukqfcd";
-      }
-    }, 1000);
   </script>
 </body>
 </html>
