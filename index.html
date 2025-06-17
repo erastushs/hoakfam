@@ -14,7 +14,6 @@
       font-family: 'Segoe UI', Tahoma, sans-serif;
       color: white;
       overflow: hidden;
-      cursor: url('cursor-gamepad.png'), auto;
     }
     canvas#particles {
       position: fixed;
@@ -110,7 +109,6 @@
       width: 100vw;
       height: 100vh;
       background-color: rgba(0, 0, 0, 0.95);
-      display: flex;
       justify-content: center;
       align-items: center;
     }
@@ -147,7 +145,7 @@
 </div>
 
   </div>  <div id="easter-egg">
-    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&rel=0" allow="autoplay"></iframe>
+    <iframe id="rickroll" src="" allow="autoplay"></iframe>
   </div>  <audio id="bgMusic" autoplay loop>
     <source src="intro.mp3" type="audio/mpeg">
   </audio>  <script>
@@ -239,6 +237,8 @@
     logo.addEventListener('click', () => {
       logoClickCount++;
       if (logoClickCount === 7) {
+        const rickroll = document.getElementById('rickroll');
+        rickroll.src = 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&rel=0';
         document.getElementById('easter-egg').style.display = 'flex';
         logoClickCount = 0;
       }
