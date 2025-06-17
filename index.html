@@ -1,11 +1,154 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="refresh" content="0;url=https://discord.com/invite/Aukqfcd">
-<title>Redirect</title>
+  <meta charset="UTF-8">
+  <title>Hoak Family Discord</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: #0e0e0e;
+      overflow: hidden;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      color: white;
+    }
+
+    canvas#particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    .container {
+      z-index: 1;
+      position: relative;
+      max-width: 600px;
+      margin: auto;
+      top: 50%;
+      transform: translateY(-50%);
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .logo {
+      width: 160px;
+      border-radius: 12px;
+      animation: pop 1.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.08); }
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-top: 1rem;
+      color: #00ffc3;
+      animation: glow 1.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00ffc3; }
+      to { text-shadow: 0 0 20px #00ffc3, 0 0 30px #00ffc3; }
+    }
+
+    p {
+      color: #ccc;
+      margin: 1.5rem 0;
+      font-size: 1.1rem;
+    }
+
+    .countdown {
+      margin-top: 1rem;
+      font-size: 1.2rem;
+      color: #aaa;
+    }
+  </style>
 </head>
 <body>
-<a href="https://discord.com/invite/Aukqfcd">klik di sini</a>.
+  <canvas id="particles"></canvas>
+  <div class="container">
+    <img src="logo.png" alt="Hoak Logo" class="logo">
+    <h1>Hoak Family Discord</h1>
+    <p>Loading ke dunia gamer... Bersiap untuk mabar, gratisan, dan bot seru!</p>
+    <div class="countdown">Mengalihkan dalam <span id="timer">10</span> detik...</div>
+  </div>
+
+  <audio autoplay>
+    <source src="intro.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let particlesArray = [];
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 1;
+        this.speedX = Math.random() * 1 - 0.5;
+        this.speedY = Math.random() * 1 - 0.5;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
+        if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
+      }
+      draw() {
+        ctx.fillStyle = '#00ffc3';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function init() {
+      particlesArray = [];
+      for (let i = 0; i < 100; i++) {
+        particlesArray.push(new Particle());
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particlesArray.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      init();
+    });
+
+    init();
+    animate();
+
+    // Countdown dan redirect
+    let count = 10;
+    const timerEl = document.getElementById('timer');
+    const interval = setInterval(() => {
+      count--;
+      timerEl.textContent = count;
+      if (count === 0) {
+        clearInterval(interval);
+        window.location.href = "https://discord.com/invite/Aukqfcd";
+      }
+    }, 1000);
+  </script>
 </body>
 </html>
