@@ -38,6 +38,7 @@
       width: 130px;
       border-radius: 12px;
       animation: glitch 1s infinite;
+      cursor: pointer;
     }
     @keyframes glitch {
       0% { transform: translate(0); }
@@ -60,11 +61,7 @@
       white-space: nowrap;
       overflow: hidden;
       border-right: .15em solid #5865F2;
-      animation: typing 3s steps(40, end), blink .75s step-end infinite;
-    }
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
+      animation: blink .75s step-end infinite;
     }
     @keyframes blink {
       from, to { border-color: transparent }
@@ -87,6 +84,11 @@
       font-size: 1.1rem;
       cursor: pointer;
       animation: pulse 1.5s infinite;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 10px #5865F2;
     }
     @keyframes pulse {
       0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(88,101,242, 0.7); }
@@ -99,10 +101,6 @@
       margin-top: 1.5rem;
       max-width: 300px;
     }
-    iframe.discord {
-      margin-top: 20px;
-      border-radius: 8px;
-    }
     @media screen and (max-width: 480px) {
       h1 { font-size: 2rem; }
       .typing { font-size: 1rem; }
@@ -113,7 +111,7 @@
 <body>
   <canvas id="particles"></canvas>
   <div class="container">
-    <img src="logo.png" alt="Hoak Logo" class="logo">
+    <img src="logo.png" alt="Hoak Logo" class="logo" id="logo">
     <h1>Hoak Family</h1>
     <div class="typing" id="typewriter"></div><ul>
   <li title="Main bareng?">🎮 Mabar game apapun bareng kita</li>
@@ -127,16 +125,16 @@
   💬 "Server paling rame buat mabar malam-malam!"<br><strong>- Devan#007</strong>
 </div>
 
-<iframe class="discord" src="https://discord.com/widget?id=504841992900182027&theme=dark" width="350" height="200" allowtransparency="true" frameborder="0"></iframe>
-
   </div>  <audio id="bgMusic" autoplay loop>
     <source src="intro.mp3" type="audio/mpeg">
   </audio>  <script>
+    // Redirect
     setTimeout(() => {
       document.body.innerHTML = '<div style="color:white;display:flex;align-items:center;justify-content:center;height:100vh;font-size:1.5rem">Redirecting...</div>';
       window.location.href = 'https://discord.com/invite/Aukqfcd';
     }, 30000);
 
+    // Play music on click
     document.addEventListener('click', () => {
       const audio = document.getElementById('bgMusic');
       if (audio.paused) {
@@ -144,6 +142,7 @@
       }
     });
 
+    // Efek typing
     const text = "Bergabunglah dengan komunitas gamers yang aktif dan seru!";
     let i = 0;
     function typeWriter() {
@@ -155,6 +154,7 @@
     }
     typeWriter();
 
+    // Partikel simbol
     const symbols = ["△", "□", "○", "×"];
     const canvas = document.getElementById('particles');
     const ctx = canvas.getContext('2d');
@@ -209,5 +209,16 @@
 
     initParticles();
     animate();
+
+    // Easter egg klik logo 7x
+    let logoClickCount = 0;
+    const logo = document.getElementById('logo');
+    logo.addEventListener('click', () => {
+      logoClickCount++;
+      if (logoClickCount === 7) {
+        alert('🕹️ Kamu menemukan rahasia tersembunyi di Hoak Family!');
+        logoClickCount = 0;
+      }
+    });
   </script></body>
 </html>
