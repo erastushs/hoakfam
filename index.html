@@ -54,8 +54,8 @@
     h1 {
       font-size: 2.5rem;
       margin-top: 1rem;
-      color: #5865F2;
-      text-shadow: 0 0 15px #5865F2;
+      color: #c33326;
+      text-shadow: 0 0 15px #c33326;
     }
     .typing {
       font-size: 1.2rem;
@@ -63,12 +63,12 @@
       height: 1.5em;
       white-space: normal;
       overflow: hidden;
-      border-right: .15em solid #5865F2;
+      border-right: .15em solid #c33326;
       animation: blink .75s step-end infinite;
     }
     @keyframes blink {
       from, to { border-color: transparent }
-      50% { border-color: #5865F2 }
+      50% { border-color: #c33326 }
     }
     ul {
       color: #ddd;
@@ -80,7 +80,7 @@
     }
     button {
       padding: 12px 30px;
-      background: #5865F2;
+      background: #c33326;
       border: none;
       border-radius: 8px;
       color: #ffffff;
@@ -91,10 +91,10 @@
     }
     button:hover {
       transform: scale(1.1);
-      box-shadow: 0 0 10px #5865F2;
+      box-shadow: 0 0 10px #c33326;
     }
     @keyframes pulse {
-      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(88, 101, 242, 0.7); }
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(195, 51, 38, 0.7); }
       70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(88, 101, 242, 0); }
       100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(88, 101, 242, 0); }
     }
@@ -147,7 +147,7 @@
     <button onclick="window.location.href='https://discord.com/invite/Aukqfcd'">Join Sekarang</button>
 
     <div class="testimoni">
-      💬 "Kita semua HOAK! HOAK!"<br><strong>- ghostea12</strong>
+      💬 "Kalian Semua HOAK! HOAK!"<br><strong>ghostea12</strong>
     </div>
   </div>
 
@@ -216,7 +216,7 @@
       }
       draw(){
         ctx.font = this.size + "px Arial";
-        ctx.fillStyle = `rgba(88, 101, 242, ${this.alpha})`;
+        ctx.fillStyle = `rgba(195, 51, 38, ${this.alpha})`;
         ctx.fillText(this.symbol, this.x, this.y);
       }
     }
@@ -261,6 +261,7 @@
   </script>
 </body>
 </html>
+
 
 
 
