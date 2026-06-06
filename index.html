@@ -7,7 +7,7 @@
       name="description"
       content="Hoak Family — Komunitas gaming Discord yang aktif dan seru. Main bareng, info game gratis, dan bot unik."
     />
-    <meta name="theme-color" content="#0B0F19" />
+    <meta name="theme-color" content="#0A0A0A" />
     <title>Hoak Family</title>
     <link rel="icon" href="hoakfam.png" type="image/png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -26,9 +26,9 @@
       }
 
       :root {
-        --bg: #0b0f19;
-        --primary: #5865f2;
-        --primary-hover: #4752c4;
+        --bg: #0a0a0a;
+        --primary: #ef4444;
+        --primary-hover: #dc2626;
         --text: #ffffff;
         --text-secondary: #a1a1aa;
         --card-bg: rgba(255, 255, 255, 0.04);
@@ -82,7 +82,7 @@
       .bg-orb-2 {
         width: 500px;
         height: 500px;
-        background: #8b5cf6;
+        background: #f97316;
         bottom: -120px;
         right: -120px;
         animation: drift 14s ease-in-out infinite reverse;
@@ -90,7 +90,7 @@
       .bg-orb-3 {
         width: 300px;
         height: 300px;
-        background: #06b6d4;
+        background: #ef4444;
         top: 45%;
         left: 50%;
         transform: translate(-50%, -50%);
@@ -146,7 +146,7 @@
         position: absolute;
         inset: -12px;
         border-radius: 20px;
-        background: radial-gradient(circle, rgba(88, 101, 242, 0.12) 0%, transparent 70%);
+        background: radial-gradient(circle, rgba(239,68,68,0.12) 0%, transparent 70%);
         pointer-events: none;
       }
       .logo-img {
@@ -163,7 +163,7 @@
       }
       .logo-img:hover {
         transform: scale(1.05);
-        filter: drop-shadow(0 0 18px rgba(88, 101, 242, 0.3));
+        filter: drop-shadow(0 0 18px rgba(239,68,68,0.3));
       }
 
       /* ── Typography ── */
@@ -204,8 +204,8 @@
           color 0.25s ease;
       }
       .badge:hover {
-        background: rgba(88, 101, 242, 0.1);
-        border-color: rgba(88, 101, 242, 0.25);
+        background: rgba(239,68,68,0.1);
+        border-color: rgba(239,68,68,0.25);
         color: var(--text);
       }
 
@@ -232,7 +232,7 @@
       .btn:hover {
         background: var(--primary-hover);
         transform: translateY(-2px) scale(1.02);
-        box-shadow: 0 0 32px rgba(88, 101, 242, 0.18);
+        box-shadow: 0 0 32px rgba(239,68,68,0.18);
       }
       .btn svg {
         width: 20px;
@@ -364,7 +364,7 @@
         let particles = []
         let animId
         const symbols = ['▲', '■', '◆', '●', '✚']
-        const colors = ['rgba(88,101,242,0.25)', 'rgba(139,92,246,0.20)', 'rgba(6,182,212,0.15)']
+        const colors = ['rgba(239,68,68,0.25)', 'rgba(249,115,22,0.18)', 'rgba(239,68,68,0.12)']
 
         function resize() {
           canvas.width = window.innerWidth
