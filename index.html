@@ -1,268 +1,480 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <title>Hoak Family</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="icon" href="hoakfam.png" type="image/png">
-  <style>
-    * { box-sizing: border-box }
-    html, body {
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      background: #1e1f22;
-      font-family: 'Segoe UI', Tahoma, sans-serif;
-      color: white;
-      overflow-x: hidden;
-    }
-    canvas#particles {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 0;
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-    .container {
-      z-index: 1;
-      position: relative;
-      width: 100%;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      text-align: center;
-    }
-    .logo {
-      width: 130px;
-      border-radius: 12px;
-      animation: glitch 1s infinite;
-      cursor: pointer;
-    }
-    @keyframes glitch {
-      0% { transform: translate(0); }
-      20% { transform: translate(-2px, 2px); }
-      40% { transform: translate(2px, -2px); }
-      60% { transform: translate(-1px, 1px); }
-      80% { transform: translate(1px, -1px); }
-      100% { transform: translate(0); }
-    }
-    h1 {
-      font-size: 2.5rem;
-      margin-top: 1rem;
-      color: #c33326;
-      text-shadow: 0 0 15px #c33326;
-    }
-    .typing {
-      font-size: 1.2rem;
-      color: #ccc;
-      height: 1.5em;
-      white-space: normal;
-      overflow: hidden;
-      border-right: .15em solid #c33326;
-      animation: blink .75s step-end infinite;
-    }
-    @keyframes blink {
-      from, to { border-color: transparent }
-      50% { border-color: #c33326 }
-    }
-    ul {
-      color: #ddd;
-      font-size: 1rem;
-      margin: 1.5rem 0;
-      line-height: 1.8;
-      padding-left: 0;
-      list-style: none;
-    }
-    button {
-      padding: 12px 30px;
-      background: #c33326;
-      border: none;
-      border-radius: 8px;
-      color: #ffffff;
-      font-size: 1.1rem;
-      cursor: pointer;
-      animation: pulse 1.5s infinite;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    button:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 10px #c33326;
-    }
-    @keyframes pulse {
-      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(195, 51, 38, 0.7); }
-      70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(88, 101, 242, 0); }
-      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(88, 101, 242, 0); }
-    }
-    .testimoni {
-      font-style: italic;
-      color: #aaa;
-      margin-top: 1.5rem;
-      max-width: 300px;
-    }
-    #easter-egg {
-      display: none;
-      position: fixed;
-      z-index: 9999;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.95);
-      justify-content: center;
-      align-items: center;
-    }
-    #easter-egg iframe {
-      width: 80vw;
-      height: 45vw;
-      max-width: 800px;
-      max-height: 450px;
-      border: none;
-      border-radius: 12px;
-    }
-    @media (max-width: 480px) {
-      h1 { font-size: 1.5rem }
-      .typing { font-size: 0.9rem }
-      button { width: 90% }
-      ul { font-size: 0.9rem }
-      .logo { width: 100px }
-    }
-  </style>
-</head>
-<body>
-  <canvas id="particles"></canvas>
-  <div class="container">
-    <img src="hoakfam.png" alt="Hoak Logo" class="logo" id="logo">
-    <h1>Hoak Family</h1>
-    <div class="typing" id="typewriter"></div>
-    <ul>
-      <li title="Main bareng?">🎮 Mabar game apapun bareng kita</li>
-      <li title="Gratisan alert">🎁 Info game gratis & info bonus in-game menarik</li>
-      <li title="Bot lucu?">🤖 Banyak bot unik dan menghibur</li>
-    </ul>
-    <button onclick="window.location.href='https://discord.com/invite/Aukqfcd'">Join Sekarang</button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Hoak Family — Komunitas gaming Discord yang aktif dan seru. Main bareng, info game gratis, dan bot unik."
+    />
+    <meta name="theme-color" content="#0B0F19" />
+    <title>Hoak Family</title>
+    <link rel="icon" href="hoakfam.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-    <div class="testimoni">
-      💬 "Kalian Semua HOAK! HOAK!"<br><strong>ghostea12</strong>
+      :root {
+        --bg: #0b0f19;
+        --primary: #5865f2;
+        --primary-hover: #4752c4;
+        --text: #ffffff;
+        --text-secondary: #a1a1aa;
+        --card-bg: rgba(255, 255, 255, 0.04);
+        --card-border: rgba(255, 255, 255, 0.06);
+        --card-border-hover: rgba(255, 255, 255, 0.1);
+        --radius: 24px;
+      }
+
+      html {
+        height: 100%;
+      }
+
+      body {
+        min-height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--bg);
+        color: var(--text);
+        font-family:
+          'Inter',
+          'Segoe UI',
+          system-ui,
+          -apple-system,
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        overflow: hidden;
+      }
+
+      /* ── Animated gradient background ── */
+      .bg {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+      }
+      .bg-orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(120px);
+        opacity: 0.08;
+      }
+      .bg-orb-1 {
+        width: 600px;
+        height: 600px;
+        background: var(--primary);
+        top: -150px;
+        left: -150px;
+        animation: drift 12s ease-in-out infinite;
+      }
+      .bg-orb-2 {
+        width: 500px;
+        height: 500px;
+        background: #8b5cf6;
+        bottom: -120px;
+        right: -120px;
+        animation: drift 14s ease-in-out infinite reverse;
+      }
+      .bg-orb-3 {
+        width: 300px;
+        height: 300px;
+        background: #06b6d4;
+        top: 45%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation: drift 10s ease-in-out infinite;
+      }
+      @keyframes drift {
+        0%,
+        100% {
+          transform: translate(0, 0) scale(1);
+        }
+        33% {
+          transform: translate(40px, -30px) scale(1.08);
+        }
+        66% {
+          transform: translate(-25px, 20px) scale(0.94);
+        }
+      }
+
+      /* ── Particles canvas ── */
+      canvas {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+      }
+
+      /* ── Card ── */
+      .card {
+        position: relative;
+        z-index: 1;
+        max-width: 420px;
+        width: calc(100% - 40px);
+        padding: 48px 36px 40px;
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: var(--radius);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        text-align: center;
+        transition: border-color 0.35s ease;
+      }
+      .card:hover {
+        border-color: var(--card-border-hover);
+      }
+
+      /* ── Logo ── */
+      .logo-wrap {
+        position: relative;
+        display: inline-block;
+        margin-bottom: 28px;
+      }
+      .logo-wrap::after {
+        content: '';
+        position: absolute;
+        inset: -12px;
+        border-radius: 20px;
+        background: radial-gradient(circle, rgba(88, 101, 242, 0.12) 0%, transparent 70%);
+        pointer-events: none;
+      }
+      .logo-img {
+        position: relative;
+        z-index: 1;
+        width: 100px;
+        height: 100px;
+        border-radius: 18px;
+        cursor: pointer;
+        transition:
+          transform 0.3s ease,
+          filter 0.3s ease;
+        user-select: none;
+      }
+      .logo-img:hover {
+        transform: scale(1.05);
+        filter: drop-shadow(0 0 18px rgba(88, 101, 242, 0.3));
+      }
+
+      /* ── Typography ── */
+      .card h1 {
+        font-size: 1.9rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        margin-bottom: 10px;
+      }
+      .card .desc {
+        font-size: 0.92rem;
+        color: var(--text-secondary);
+        line-height: 1.65;
+        margin-bottom: 28px;
+      }
+
+      /* ── Badges ── */
+      .badges {
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 32px;
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 6px 14px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 100px;
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        transition:
+          background 0.25s ease,
+          border-color 0.25s ease,
+          color 0.25s ease;
+      }
+      .badge:hover {
+        background: rgba(88, 101, 242, 0.1);
+        border-color: rgba(88, 101, 242, 0.25);
+        color: var(--text);
+      }
+
+      /* ── Button ── */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 36px;
+        background: var(--primary);
+        color: #fff;
+        border: none;
+        border-radius: 12px;
+        font-family: inherit;
+        font-size: 0.95rem;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        transition:
+          background 0.25s ease,
+          transform 0.25s ease,
+          box-shadow 0.25s ease;
+      }
+      .btn:hover {
+        background: var(--primary-hover);
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 0 32px rgba(88, 101, 242, 0.18);
+      }
+      .btn svg {
+        width: 20px;
+        height: 20px;
+        fill: currentColor;
+      }
+
+      /* ── Fade-in ── */
+      .card {
+        opacity: 0;
+        transform: translateY(16px);
+        animation: fadeUp 0.7s 0.15s ease forwards;
+      }
+      @keyframes fadeUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ── Easter egg ── */
+      .overlay {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.95);
+        justify-content: center;
+        align-items: center;
+      }
+      .overlay.active {
+        display: flex;
+      }
+      .overlay iframe {
+        width: 80vw;
+        height: 45vw;
+        max-width: 800px;
+        max-height: 450px;
+        border: none;
+        border-radius: 12px;
+      }
+      .overlay-close {
+        position: absolute;
+        top: 24px;
+        right: 24px;
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        border-radius: 50%;
+        color: #fff;
+        font-size: 1.15rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+      }
+      .overlay-close:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      /* ── Reduced motion ── */
+      @media (prefers-reduced-motion: reduce) {
+        .bg-orb,
+        canvas,
+        .card {
+          animation: none;
+        }
+        .card {
+          opacity: 1;
+          transform: none;
+        }
+        .btn:hover {
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Background -->
+    <div class="bg">
+      <div class="bg-orb bg-orb-1"></div>
+      <div class="bg-orb bg-orb-2"></div>
+      <div class="bg-orb bg-orb-3"></div>
     </div>
-  </div>
+    <canvas id="particles"></canvas>
 
-  <div id="easter-egg">
-    <iframe id="rickroll" src="" allow="autoplay"></iframe>
-  </div>
+    <!-- Card -->
+    <div class="card">
+      <div class="logo-wrap">
+        <img src="hoakfam.png" alt="Hoak Family Logo" class="logo-img" id="logo" />
+      </div>
+      <h1>Hoak Family</h1>
+      <p class="desc">
+        Komunitas gaming Discord yang aktif dan seru. Main bareng game apapun, dapetin info game gratis, dan nikmatin
+        keseruan bareng teman baru.
+      </p>
+      <div class="badges">
+        <span class="badge">🎮 Gaming</span>
+        <span class="badge">🎁 Giveaways</span>
+        <span class="badge">🤖 Fun Bots</span>
+      </div>
+      <a href="https://discord.com/invite/Aukqfcd" target="_blank" rel="noopener" class="btn">
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M20.317 4.37a19.8 19.8 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.3 18.3 0 0 0-5.487 0 12.7 12.7 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.7 19.7 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.08.08 0 0 0 .031.057 19.8 19.8 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028q.732-1.001 1.033-1.624a.076.076 0 0 0-.043-.106 13.1 13.1 0 0 1-1.58-.75.077.077 0 0 1-.008-.128 10 10 0 0 0 .387-.304.076.076 0 0 1 .088-.01c3.323 1.517 6.93 1.517 10.19 0a.076.076 0 0 1 .09.01q.192.16.387.304a.077.077 0 0 1-.007.128c-.497.293-1.023.547-1.582.753a.076.076 0 0 0-.041.107c.304.626.674 1.236 1.03 1.621a.078.078 0 0 0 .084.028 19.7 19.7 0 0 0 6.002-3.03.076.076 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.06.06 0 0 0-.031-.03M8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418m7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418"
+          />
+        </svg>
+        Join Discord
+      </a>
+    </div>
 
-  <audio id="bgMusic" autoplay loop>
-    <source src="intro.mp3" type="audio/mpeg">
-  </audio>
+    <audio id="bgMusic" loop>
+      <source src="intro.mp3" type="audio/mpeg" />
+    </audio>
 
-  <script>
-    // Redirect after 30sec
-    setTimeout(() => {
-      document.body.innerHTML ='<div style="color:white;display:flex;align-items:center;justify-content:center;height:100vh;font-size:1.5rem">Redirecting...</div>';
-      window.location.href='https://discord.com/invite/Aukqfcd';
-    }, 30000);
+    <!-- Easter Egg -->
+    <div class="overlay" id="overlay">
+      <button class="overlay-close" id="overlay-close" aria-label="Close">✕</button>
+      <iframe id="rickroll" src="" allow="autoplay"></iframe>
+    </div>
 
-    // Play audio on first click
-    document.addEventListener('click', () => {
-      const audio = document.getElementById('bgMusic');
-      if (audio.paused) {
-        audio.play().catch(() => {});
+    <script>
+      ;(function () {
+        // ── Subtle particles ──
+        const canvas = document.getElementById('particles')
+        const ctx = canvas.getContext('2d')
+        let particles = []
+        let animId
+        const symbols = ['▲', '■', '◆', '●', '✚']
+        const colors = ['rgba(88,101,242,0.25)', 'rgba(139,92,246,0.20)', 'rgba(6,182,212,0.15)']
+
+        function resize() {
+          canvas.width = window.innerWidth
+          canvas.height = window.innerHeight
+        }
+
+        class Particle {
+          constructor() {
+            this.reset(true)
+          }
+          reset(init) {
+            this.x = init ? Math.random() * canvas.width : Math.random() < 0.5 ? -30 : canvas.width + 30
+            this.y = init ? Math.random() * canvas.height : Math.random() < 0.5 ? -30 : canvas.height + 30
+            this.size = Math.random() * 10 + 6
+            this.speedX = (Math.random() - 0.5) * 0.25
+            this.speedY = (Math.random() - 0.5) * 0.25
+            this.symbol = symbols[Math.floor(Math.random() * symbols.length)]
+            this.color = colors[Math.floor(Math.random() * colors.length)]
+            this.rotation = Math.random() * Math.PI * 2
+            this.rotSpeed = (Math.random() - 0.5) * 0.008
+          }
+          update() {
+            this.x += this.speedX
+            this.y += this.speedY
+            this.rotation += this.rotSpeed
+            if (this.x < -50 || this.x > canvas.width + 50 || this.y < -50 || this.y > canvas.height + 50) {
+              this.reset(false)
+            }
+          }
+          draw() {
+            ctx.save()
+            ctx.translate(this.x, this.y)
+            ctx.rotate(this.rotation)
+            ctx.font = `${this.size}px Inter, system-ui, sans-serif`
+            ctx.textAlign = 'center'
+            ctx.textBaseline = 'middle'
+            ctx.fillStyle = this.color
+            ctx.fillText(this.symbol, 0, 0)
+            ctx.restore()
+          }
+        }
+
+        function init() {
+          particles = Array.from({ length: 22 }, () => new Particle())
+        }
+
+        function animate() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height)
+          particles.forEach((p) => {
+            p.update()
+            p.draw()
+          })
+          animId = requestAnimationFrame(animate)
+        }
+
+        resize()
+        init()
+        animate()
+        window.addEventListener('resize', () => {
+          resize()
+          init()
+        })
+
+        // ── Easter egg (7 clicks on logo) ──
+        const logo = document.getElementById('logo')
+        const overlay = document.getElementById('overlay')
+        const rickroll = document.getElementById('rickroll')
+        const closeBtn = document.getElementById('overlay-close')
+        let clickCount = 0
+        let clickTimer = null
+
+        logo.addEventListener('click', () => {
+          clickCount++
+          if (clickTimer) clearTimeout(clickTimer)
+          clickTimer = setTimeout(() => {
+            clickCount = 0
+          }, 2000)
+          if (clickCount === 7) {
+            rickroll.src = 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&rel=0'
+            overlay.classList.add('active')
+            clickCount = 0
+          }
+        })
+
+        function closeOverlay() {
+          overlay.classList.remove('active')
+          rickroll.src = ''
+        }
+        closeBtn.addEventListener('click', closeOverlay)
+        overlay.addEventListener('click', (e) => {
+          if (e.target === overlay) closeOverlay()
+        })
+      })()
+
+      // Redirect after 30sec
+      setTimeout(() => {
+        document.body.innerHTML =
+          '<div style="color:white;display:flex;align-items:center;justify-content:center;height:100vh;font-size:1.5rem">Redirecting...</div>'
+        window.location.href = 'https://discord.com/invite/Aukqfcd'
+      }, 30000)
+
+      // Play audio on first interaction
+      const playAudio = () => {
+        const audio = document.getElementById('bgMusic')
+        audio.play().catch(() => {})
+        document.removeEventListener('click', playAudio)
       }
-    });
+      document.addEventListener('click', playAudio)
 
-    // Typing
-    const text = "Bergabunglah dengan komunitas gamers yang aktif dan seru!";
-    let i = 0;
-    function typeWriter() {
-      if (i < text.length) {
-        document.getElementById("typewriter").textContent += text.charAt(i);
-        i++;
-        setTimeout(typeWriter, 40);
-      }
-    }
-    typeWriter();
 
-    // Partikel
-    const symbols = ["△","□","○","×"];
-
-    const canvas = document.getElementById('particles');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    let particlesArray = [];
-
-    class Particle {
-      constructor(){
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 24 + 16;
-        this.speedX = Math.random() * 0.6 - 0.3;
-        this.speedY = Math.random() * 0.6 - 0.3;
-        this.symbol = symbols[Math.floor(Math.random() * symbols.length)];
-
-        this.alpha = Math.random() * 0.5 + 0.3;
-      }
-      update(){
-        this.x += this.speedX;
-        this.y += this.speedY;
-
-        if(this.x > canvas.width || this.x < 0) this.speedX *= -1;
-        if(this.y > canvas.height || this.y < 0) this.speedY *= -1;
-      }
-      draw(){
-        ctx.font = this.size + "px Arial";
-        ctx.fillStyle = `rgba(195, 51, 38, ${this.alpha})`;
-        ctx.fillText(this.symbol, this.x, this.y);
-      }
-    }
-
-    function initParticles(){
-      particlesArray = [];
-
-      for(let i = 0; i < 70; i++) {
-        particlesArray.push(new Particle());  
-      }
-    }
-    function animate(){
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particlesArray.forEach(p => {
-        p.update();
-        p.draw();
-      });
-      requestAnimationFrame(animate);
-    }
-    window.addEventListener('resize', () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      initParticles();
-    });
-
-    initParticles();
-    animate();
-
-    // Easter Egg
-    let logoClickCount = 0;
-    const logo = document.getElementById('logo');
-    logo.addEventListener('click', () => {
-      logoClickCount++;
-      if (logoClickCount === 7) {
-        const rickroll = document.getElementById('rickroll');
-        rickroll.src = 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&rel=0';
-        document.getElementById('easter-egg').style.display = 'flex';
-        logoClickCount = 0;
-      }
-    });
-
-  </script>
-</body>
+    </script>
+  </body>
 </html>
-
-
-
-
-
